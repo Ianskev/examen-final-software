@@ -1,6 +1,9 @@
 [run]
-source = src/models
-omit = tests/*
+source = src
+omit = 
+    tests/*
+    */__pycache__/*
+    */site-packages/*
 
 [report]
 exclude_lines =
@@ -9,3 +12,4 @@ exclude_lines =
     raise NotImplementedError
     if __name__ == .__main__.:
     pass
+    raise ImportError

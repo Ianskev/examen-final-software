@@ -4,7 +4,7 @@ import unittest
 import datetime
 from unittest.mock import MagicMock
 
-# Agregar el directorio src al path para poder importar los módulos
+# Directorio src al path para poder importar los módulos
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 from src.models.usuario import Usuario

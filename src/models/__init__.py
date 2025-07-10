@@ -1,1 +1,1 @@
-# This file is intentionally left blank.
+# Archivo en blanco de forma intencional
