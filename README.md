@@ -31,8 +31,8 @@ examenfinal2025_01/
 ### Pasos de Instalación
 1. Clonar el repositorio:
    ```
-   git clone <URL-del-repositorio>
-   cd examenfinal2025_01
+   git clone https://github.com/Ianskev/examen-final-software
+   cd examen-final-software
    ```
 
 2. Crear y activar un entorno virtual (opcional pero recomendado):
@@ -113,27 +113,3 @@ TOTAL                         53      0   100%
 ```
 
 Esta cobertura del 100% cumple con el requisito del examen de tener cobertura completa en las clases Usuario, Tarea y Asignacion.
-
-## Estructura de Clases
-
-### Clase Usuario
-- **Atributos**: alias, nombre, tareasAsociadas
-- **Métodos**: get_user_info(), to_dict()
-
-### Clase Tarea
-- **Atributos**: id, nombre, descripcion, estado, fechaEsperadaFin, usuariosAsignados, dependencias
-- **Métodos**: cambiar_estado(), agregar_dependencia(), remover_dependencia(), to_dict()
-
-### Clase Asignacion
-- **Atributos**: usuarioAsignado, rol, fechaAsignacion
-- **Métodos**: get_assignment_details(), to_dict()
-
-## Contribución
-Las contribuciones son bienvenidas. Por favor, asegúrate de ejecutar todas las pruebas antes de enviar un pull request.
-
-## Licencia
-Este proyecto está licenciado bajo los términos de la licencia MIT.
-Las contribuciones son bienvenidas. Por favor, asegúrate de ejecutar todas las pruebas antes de enviar un pull request.
-
-## Licencia
-Este proyecto está licenciado bajo los términos de la licencia MIT.
