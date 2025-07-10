@@ -82,18 +82,13 @@ python -m unittest discover tests
 ### Generar Informe de Cobertura
 Para ejecutar las pruebas con cobertura y generar un informe que muestre el 100% de cobertura:
 
-1. Método simple utilizando el script:
-   ```
-   python run_coverage.py
-   ```
-
-2. O, manualmente con los comandos:
+1. O, manualmente con los comandos:
    ```
    python -m coverage run --source=src.models -m unittest discover tests
    python -m coverage report -m
    ```
 
-3. (Opcional) Generar un informe HTML detallado:
+2. (Opcional) Generar un informe HTML detallado:
    ```
    python -m coverage html
    ```
