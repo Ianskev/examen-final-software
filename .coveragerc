@@ -1,11 +1,15 @@
 [run]
-source = src
-omit = 
-    tests/*
-    */__pycache__/*
-    */site-packages/*
+source = src/models
 
 [report]
+omit =
+    */site-packages/*
+    */tests/*
+    src/controller.py
+    src/data_handler.py
+    src/utils/__init__.py
+    src/__init__.py
+
 exclude_lines =
     pragma: no cover
     def __repr__
