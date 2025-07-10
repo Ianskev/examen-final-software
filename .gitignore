@@ -1,0 +1,34 @@
+# Archivos de bytecode de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribución / empaquetado
+dist/
+build/
+*.egg-info/
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.env
+
+# Archivos de cobertura de pruebas
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+htmlcov/
+.tox/
+
+# Archivos de datos y logs
+*.log
+data.json
+
+# Archivos generados por IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store

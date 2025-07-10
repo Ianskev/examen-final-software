@@ -1,49 +1,122 @@
-# Task System Application
+# Sistema de Gestión de Tareas
 
-## Overview
-This project is a simple task management system that allows users to create, assign, and manage tasks. It is designed to be easy to use and extend, making it suitable for personal or small team use.
+## Descripción General
+Este proyecto implementa un sistema de gestión de tareas que permite a los usuarios crear, asignar y gestionar tareas. El sistema está diseñado siguiendo una arquitectura orientada a objetos y expone varios endpoints REST para su interacción.
 
-## Project Structure
+## Estructura del Proyecto
 ```
-task-system-app
-├── src
+examenfinal2025_01/
+├── src/
 │   ├── __init__.py
-│   ├── controller.py
-│   ├── data_handler.py
-│   ├── models
+│   ├── controller.py        # Controlador con endpoints REST
+│   ├── data_handler.py      # Manejo de datos y persistencia
+│   ├── models/              # Modelos de datos
 │   │   ├── __init__.py
-│   │   ├── usuario.py
-│   │   ├── tarea.py
-│   │   └── asignacion.py
-│   └── utils
-│       └── __init__.py
-├── requirements.txt
+│   │   ├── usuario.py       # Clase Usuario
+│   │   ├── tarea.py         # Clase Tarea
+│   │   └── asignacion.py    # Clase Asignacion
+│   └── utils/
+│       └── __init__.py      # Utilidades para validación
+├── tests/
+│   ├── __init__.py
+│   └── test_models.py       # Pruebas unitarias para los modelos
+├── app.py                   # Punto de entrada principal
+├── requirements.txt         # Dependencias del proyecto
 └── README.md
 ```
 
-## Installation
-1. Clone the repository:
+## Instalación
+
+### Requisitos Previos
+- Python 3.8 o superior
+- pip (gestor de paquetes de Python)
+
+### Pasos de Instalación
+1. Clonar el repositorio:
    ```
-   git clone <repository-url>
+   git clone <URL-del-repositorio>
+   cd examenfinal2025_01
    ```
-2. Navigate to the project directory:
+
+2. Crear y activar un entorno virtual (opcional pero recomendado):
    ```
-   cd task-system-app
+   # En Windows
+   python -m venv venv
+   venv\Scripts\activate
+
+   # En MacOS/Linux
+   python3 -m venv venv
+   source venv/bin/activate
    ```
-3. Install the required dependencies:
+
+3. Instalar las dependencias:
    ```
    pip install -r requirements.txt
    ```
 
-## Usage
-To run the application, you can create a main script that utilizes the `TaskController` class from `controller.py`. Here is a simple example:
+## Ejecución del Programa
 
-```python
-python src/controller.py
+Para ejecutar la aplicación, utiliza el siguiente comando en la terminal:
+```
+python app.py
 ```
 
-## Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
+Esto iniciará el servidor Flask en modo de desarrollo en `http://127.0.0.1:5000/`.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+### Endpoints Disponibles
+
+| Endpoint | Método | Descripción |
+|----------|--------|-------------|
+| `/usuarios/mialias=<alias>` | GET | Obtener información de un usuario y sus tareas |
+| `/usuarios` | POST | Crear un nuevo usuario |
+| `/tasks` | POST | Crear una nueva tarea |
+| `/tasks/<id>` | POST | Actualizar el estado de una tarea |
+| `/tasks/<id>/users` | POST | Gestionar usuarios asignados a una tarea |
+| `/tasks/<id>/dependencies` | POST | Gestionar dependencias entre tareas |
+
+## Ejecución de Pruebas
+
+### Ejecutar Todas las Pruebas
+Para ejecutar todas las pruebas unitarias:
+```
+python -m unittest discover tests
+```
+
+### Generar Informe de Cobertura
+Para ejecutar las pruebas con cobertura y generar un informe:
+
+1. Ejecutar las pruebas con coverage:
+   ```
+   python -m coverage run -m unittest discover tests
+   ```
+
+2. Ver el informe de cobertura en la terminal:
+   ```
+   python -m coverage report -m
+   ```
+
+3. (Opcional) Generar un informe HTML detallado:
+   ```
+   python -m coverage html
+   ```
+   Esto generará un directorio `htmlcov/` con un informe detallado que puedes abrir en tu navegador.
+
+## Estructura de Clases
+
+### Clase Usuario
+- **Atributos**: alias, nombre, tareasAsociadas
+- **Métodos**: get_user_info(), to_dict()
+
+### Clase Tarea
+- **Atributos**: id, nombre, descripcion, estado, fechaEsperadaFin, usuariosAsignados, dependencias
+- **Métodos**: cambiar_estado(), agregar_dependencia(), remover_dependencia(), to_dict()
+
+### Clase Asignacion
+- **Atributos**: usuarioAsignado, rol, fechaAsignacion
+- **Métodos**: get_assignment_details(), to_dict()
+
+## Contribución
+Las contribuciones son bienvenidas. Por favor, asegúrate de ejecutar todas las pruebas antes de enviar un pull request.
+
+## Licencia
+Este proyecto está licenciado bajo los términos de la licencia MIT.

@@ -5,11 +5,11 @@ import datetime
 from unittest.mock import MagicMock
 
 # Agregar el directorio src al path para poder importar los módulos
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from models.usuario import Usuario
-from models.tarea import Tarea
-from models.asignacion import Asignacion
+from src.models.usuario import Usuario
+from src.models.tarea import Tarea
+from src.models.asignacion import Asignacion
 
 class TestUsuario(unittest.TestCase):
     """Pruebas para la clase Usuario"""
@@ -200,7 +200,8 @@ class TestTarea(unittest.TestCase):
         Prueba que el método to_dict devuelva la representación correcta de la tarea
         """
         # Arrange
-        tarea = Tarea("Tarea Test", "Descripción de prueba")
+        fecha_ahora = datetime.datetime.now()
+        tarea = Tarea("Tarea Test", "Descripción de prueba", fecha_ahora)
         usuario_mock = MagicMock()
         usuario_mock.alias = "testuser"
         
@@ -222,9 +223,10 @@ class TestTarea(unittest.TestCase):
         self.assertEqual(resultado["nombre"], "Tarea Test")
         self.assertEqual(resultado["descripcion"], "Descripción de prueba")
         self.assertEqual(resultado["estado"], "Nueva")
-        self.assertIsNotNone(resultado["fecha_esperada_fin"])
+        self.assertEqual(resultado["fecha_esperada_fin"], fecha_ahora.strftime("%Y-%m-%d %H:%M:%S"))
         self.assertEqual(len(resultado["usuarios_asignados"]), 1)
         self.assertEqual(len(resultado["dependencias"]), 2)
+        self.assertEqual(resultado["usuarios_asignados"][0], asignacion.to_dict.return_value)
 
 
 class TestAsignacion(unittest.TestCase):
@@ -273,8 +275,11 @@ class TestAsignacion(unittest.TestCase):
         usuario_mock.alias = "testuser"
         rol = "programacion"
         
+        # Establecer una fecha específica para pruebas determinísticas
+        fecha_asignacion = datetime.datetime(2023, 1, 1, 12, 0, 0)
+        
         asignacion = Asignacion(usuario_mock, rol)
-        fecha_str = asignacion.fechaAsignacion.strftime("%Y-%m-%d %H:%M:%S")
+        asignacion.fechaAsignacion = fecha_asignacion
         
         # Act
         detalles = asignacion.get_assignment_details()
@@ -282,7 +287,7 @@ class TestAsignacion(unittest.TestCase):
         # Assert
         self.assertEqual(detalles["usuario"], "testuser")
         self.assertEqual(detalles["rol"], rol)
-        self.assertEqual(detalles["fecha_asignacion"], fecha_str)
+        self.assertEqual(detalles["fecha_asignacion"], "2023-01-01 12:00:00")
     
     def test_to_dict(self):
         """
@@ -293,8 +298,11 @@ class TestAsignacion(unittest.TestCase):
         usuario_mock.alias = "testuser"
         rol = "programacion"
         
+        # Establecer una fecha específica para pruebas determinísticas
+        fecha_asignacion = datetime.datetime(2023, 1, 1, 12, 0, 0)
+        
         asignacion = Asignacion(usuario_mock, rol)
-        fecha_str = asignacion.fechaAsignacion.strftime("%Y-%m-%d %H:%M:%S")
+        asignacion.fechaAsignacion = fecha_asignacion
         
         # Act
         resultado = asignacion.to_dict()
@@ -302,7 +310,7 @@ class TestAsignacion(unittest.TestCase):
         # Assert
         self.assertEqual(resultado["usuario"], "testuser")
         self.assertEqual(resultado["rol"], rol)
-        self.assertEqual(resultado["fecha_asignacion"], fecha_str)
+        self.assertEqual(resultado["fecha_asignacion"], "2023-01-01 12:00:00")
 
 
 if __name__ == "__main__":
