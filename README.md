@@ -76,9 +76,9 @@ Esto iniciará el servidor Flask en modo de desarrollo en `http://127.0.0.1:5000
 ### Ejecutar Todas las Pruebas
 Para ejecutar todas las pruebas unitarias:
 ```
-python -m unittest discover tests
+python -m coverage run -m unittest discover tests
 o
-python3 -m unittest discover tests
+python3 -m coverage run -m unittest discover tests
 ```
 
 ### Generar Informe de Cobertura
@@ -87,13 +87,13 @@ Para ejecutar las pruebas con cobertura y generar un informe que muestre el 100%
 1. O, manualmente con los comandos:
    Windows:
    ```
-   python -m unittest discover tests
+   python -m coverage run -m unittest discover tests
    python -m coverage report -m
    ```
 
    MacOS / Linux:
    ```
-   python3 -m unittest discover tests
+   python3 -m coverage run -m unittest discover tests
    python3 -m coverage report -m
    ```
 
